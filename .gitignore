@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Raw downloads (keep the repo small; data is re-downloadable from the APIs)
+data/raw/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
