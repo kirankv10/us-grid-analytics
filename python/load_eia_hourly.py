@@ -163,7 +163,7 @@ def main():
         raise SystemExit("--end must be after --start")
 
     datasets = list(DATASETS) if args.dataset == "all" else [args.dataset]
-    client = EIAClient(config.EIA_API_KEY)
+    client = EIAClient(config.EIA_API_KEY, max_retries=6, pause_seconds=1.0)
 
     with pyodbc.connect(config.sql_connection_string(), autocommit=False) as conn:
         for dataset in datasets:

@@ -6,7 +6,7 @@ import time
 import requests
 
 BASE_URL = "https://api.eia.gov/v2"
-PAGE_SIZE = 5000                      # EIA v2 returns at most 5,000 rows per request
+PAGE_SIZE = 2500                      # EIA v2 returns at most 5,000 rows per request
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
 log = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ class EIAClient:
         """GET with exponential back-off on network errors and retryable status codes."""
         for attempt in range(1, self.max_retries + 1):
             try:
-                response = self.session.get(url, params=params, timeout=60)
+                response = self.session.get(url, params=params, timeout=120)
                 if response.status_code in RETRYABLE_STATUS:
                     raise requests.HTTPError(
                         f"Retryable status {response.status_code}", response=response
